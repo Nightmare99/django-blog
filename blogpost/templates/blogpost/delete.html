@@ -1,0 +1,38 @@
+<html>
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="HandheldFriendly" content="true">
+<link rel = "stylesheet" type = "text/css" href = "{% static 'blogpost/bootstrap.css' %}">
+<link rel = "stylesheet" type = "text/css" href = "{% static 'blogpost/local.css' %}">
+</head>
+<body>
+
+<br><br>
+        <div class="container">
+            <div class = "row">
+                <div class = "col">
+                    <div class = "card shadow-lg mx-auto">
+                        {% if user.is_authenticated %}
+                        <div class = "card-header">
+                            <h1 class = "display-1">{{ object.heading }}</h1>
+                        </div>
+                        <div class = "card-body">
+                            <form action = "" method ="post">
+                                {% csrf_token %}
+                                <strong>Are you sure you want to delete the post?</strong>
+                                <br><br>
+                                <button type = "submit" class = "btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                        {% else %}
+                        <div class = "card-body"><strong>You don't have permissions to delete posts.</strong></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+</body>
+</html>

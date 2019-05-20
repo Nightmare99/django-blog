@@ -1,0 +1,36 @@
+<html>
+<head>
+{% load static %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="HandheldFriendly" content="true">
+<link rel = "stylesheet" type = "text/css" href = "{% static 'blogpost/bootstrap.css' %}">
+<link rel = "stylesheet" type = "text/css" href = "{% static 'blogpost/local.css' %}">
+</head>
+<body>
+<br><br>
+{% if p %}
+        <div class="container">
+            <div class = "row">
+                <div class = "col">
+                    <div class = "card shadow-lg">
+                        <h1 class = "display-1 card-header">{{ p.heading }}</h1>
+                        <h2 class = "display-5 card-body">{{ p.upload_date.date }}</h2>
+                        <p class = "card-body">{{ p.content }}</p>
+                        <div class = "card-body">
+                            <a href = "{% url 'Index' %}" class = "btn btn-outline-primary" role = "button">Go back</a>
+                            {% if user.is_authenticated %}
+                            <a href = "{% url 'Modify' p.pk %}" class = "btn btn-outline-primary" role = "button">Edit</a>
+                            <a href = "{% url 'Delete' p.pk %}" class = "btn btn-outline-danger" role = "button" style = "float: right;">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+{% else %}
+    <h2>Post not found.</h2>
+{% endif %}
+</body>
+</html>
